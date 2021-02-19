@@ -1,6 +1,4 @@
-# HRC1155 Tradable Smart Contract (Improvement of HRC721)
-
-HRC1155 Tradable smart contract forked by ERC1155 developed by ENJIN team
+# Harmony NFT Marketplace Contract
 
 ## Development
 
@@ -29,4 +27,4 @@ npm run deploy:testnet
 npm run deploy:mainnet
 ```
 
-HRC1155 is using Solc 0.6.12 as it's a most stable version.
+This project is using Solc 0.6.12 as it's a most stable version.
