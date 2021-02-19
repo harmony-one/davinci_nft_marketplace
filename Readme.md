@@ -1,4 +1,4 @@
-# Harmony NFT Marketplace Contract
+# daVinci (Harmony NFT Marketplace Contract)
 
 ## Development
 
