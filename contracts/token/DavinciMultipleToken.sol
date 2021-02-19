@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "../lib/utils/SignerRole.sol";
 import "../lib/contracts/ERC1155Base.sol";
 
-contract RaribleToken is Ownable, SignerRole, ERC1155Base {
+contract DavinciMultipleToken is Ownable, SignerRole, ERC1155Base {
     string public name;
     string public symbol;
 

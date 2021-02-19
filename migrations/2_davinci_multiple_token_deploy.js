@@ -1,18 +1,18 @@
-var DavinchiMultipleToken = artifacts.require("DavinchiMultipleToken");
+var DavinciMultipleToken = artifacts.require("DavinciMultipleToken");
 
 module.exports = function(deployer) {
   deployer.then(function() {
     return deployer
       .deploy(
-        DavinchiMultipleToken,
-        "Davinchi",
-        "VINCH",
+        DavinciMultipleToken,
+        "Davinci",
+        "VINC",
         deployer.address,
         "CONTRACT_URI",
         "TOKEN_URI"
       )
       .then(function(token) {
-        console.log(`DavinchiMultipleToken is deployed at ${token.address}`);
+        console.log(`DavinciMultipleToken is deployed at ${token.address}`);
       });
   });
 };

@@ -6,10 +6,10 @@ import "../lib/contracts/ERC721Base.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @title MintableToken
+ * @title DavinciToken
  * @dev anyone can mint token.
  */
-contract MintableToken is Ownable, IERC721, ERC721Base {
+contract DavinciToken is Ownable, IERC721, ERC721Base {
 
     constructor (string memory name, string memory symbol, address newOwner, string memory contractURI, string memory tokenURIPrefix) public ERC721Base(name, symbol, contractURI, tokenURIPrefix) {
         _registerInterface(bytes4(keccak256('MINT_WITH_ADDRESS')));
