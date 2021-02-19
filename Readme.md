@@ -31,6 +31,6 @@ This project is using Solc 0.6.12 as it's a most stable version.
 
 ## Contracts
 
-ExchangeV1.sol - Main Contract for exchange
-DavinciToken - HRC721 Token
-DavinciMultipleToken - HRC1155 TOken
+- ExchangeV1.sol - Main Contract for exchange
+- DavinciToken - HRC721 Token
+- DavinciMultipleToken - HRC1155 TOken
