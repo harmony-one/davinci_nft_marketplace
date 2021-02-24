@@ -16,18 +16,9 @@ contract DavinciToken is Ownable, IERC721, ERC721Base {
         _registerInterface(bytes4(keccak256('MINT_WITH_ADDRESS')));
         transferOwnership(newOwner);
     }
-
-    function getHash(uint256 tokenId) public view returns(bytes32) {
-        return keccak256(abi.encodePacked(this, tokenId));
-    }
-
-    function getOwner(uint256 tokenId, uint8 v, bytes32 r, bytes32 s) public view returns (bytes32){
-        return ecrecover(keccak256(abi.encodePacked(this, tokenId)), v, r, s);
-    }
-
+    
     function mint(uint256 tokenId, uint8 v, bytes32 r, bytes32 s, Fee[] memory _fees, string memory tokenURI) public {
-        console.log("owner in solidity ===>", ecrecover(keccak256(abi.encodePacked(this, tokenId)), v, r, s));
-        require(owner() == ecrecover(keccak256(abi.encodePacked(this, tokenId)), v, r, s), "owner should sign tokenId");
+        require(owner() == ecrecover(keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", keccak256(abi.encodePacked(this, tokenId)))), v, r, s), "owner should sign tokenId");
         _mint(msg.sender, tokenId, _fees);
         _setTokenURI(tokenId, tokenURI);
     }

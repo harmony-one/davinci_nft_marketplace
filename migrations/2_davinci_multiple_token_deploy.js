@@ -10,7 +10,7 @@ module.exports = function(deployer) {
         "VINC",
         admin,
         "https://davinci.com/davinci-hrc721",
-        "https://davinci.com/token/"
+        "https://davinci.com/token"
       )
       .then(function(token) {
         console.log(`DavinciMultipleToken is deployed at ${token.address}`);
