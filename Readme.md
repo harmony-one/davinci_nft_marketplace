@@ -1,4 +1,4 @@
-# Harmony NFT Marketplace Contract
+# daVinci (Harmony NFT Marketplace Contract)
 
 ## Development
 
@@ -33,4 +33,4 @@ This project is using Solc 0.6.12 as it's a most stable version.
 
 - ExchangeV1.sol - Main Contract for exchange
 - DavinciToken - HRC721 Token
-- DavinciMultipleToken - HRC1155 TOken
+- DavinciMultipleToken - HRC1155 Token
