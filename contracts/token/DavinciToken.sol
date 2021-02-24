@@ -4,6 +4,7 @@ pragma experimental ABIEncoderV2;
 import "../lib/interface/IERC721.sol";
 import "../lib/contracts/ERC721Base.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "hardhat/console.sol";
 
 /**
  * @title DavinciToken
@@ -16,7 +17,16 @@ contract DavinciToken is Ownable, IERC721, ERC721Base {
         transferOwnership(newOwner);
     }
 
+    function getHash(uint256 tokenId) public view returns(bytes32) {
+        return keccak256(abi.encodePacked(this, tokenId));
+    }
+
+    function getOwner(uint256 tokenId, uint8 v, bytes32 r, bytes32 s) public view returns (bytes32){
+        return ecrecover(keccak256(abi.encodePacked(this, tokenId)), v, r, s);
+    }
+
     function mint(uint256 tokenId, uint8 v, bytes32 r, bytes32 s, Fee[] memory _fees, string memory tokenURI) public {
+        console.log("owner in solidity ===>", ecrecover(keccak256(abi.encodePacked(this, tokenId)), v, r, s));
         require(owner() == ecrecover(keccak256(abi.encodePacked(this, tokenId)), v, r, s), "owner should sign tokenId");
         _mint(msg.sender, tokenId, _fees);
         _setTokenURI(tokenId, tokenURI);
