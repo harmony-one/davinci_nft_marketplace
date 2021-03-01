@@ -46,6 +46,7 @@ module.exports = {
         truffleProvider.setSigner(newAcc);
         return truffleProvider;
       },
+      skipDryRun: true,
     },
     mainnet: {
       network_id: "1",
@@ -61,12 +62,17 @@ module.exports = {
         return truffleProvider;
       },
     },
+    skipDryRun: true,
   },
 
   // Configure your compilers
   compilers: {
     solc: {
       version: "0.6.12",
+      optimizer: {
+        enabled: true, // Default: false
+        runs: 1000, // Default: 200
+      },
     },
   },
 };

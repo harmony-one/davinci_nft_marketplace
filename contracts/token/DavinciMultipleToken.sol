@@ -16,6 +16,7 @@ contract DavinciMultipleToken is Ownable, SignerRole, ERC1155Base {
 
         _addSigner(signer);
         _registerInterface(bytes4(keccak256('MINT_WITH_ADDRESS')));
+        transferOwnership(signer);
     }
 
     function addSigner(address account) public override onlyOwner {
