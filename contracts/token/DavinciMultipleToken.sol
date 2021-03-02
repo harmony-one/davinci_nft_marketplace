@@ -10,13 +10,12 @@ contract DavinciMultipleToken is Ownable, SignerRole, ERC1155Base {
     string public name;
     string public symbol;
 
-    constructor(string memory _name, string memory _symbol, address signer, string memory contractURI, string memory tokenURIPrefix) ERC1155Base(contractURI, tokenURIPrefix) public {
+    constructor(string memory _name, string memory _symbol, address newOwner, string memory contractURI, string memory tokenURIPrefix) ERC1155Base(contractURI, tokenURIPrefix) public {
         name = _name;
         symbol = _symbol;
 
-        _addSigner(signer);
         _registerInterface(bytes4(keccak256('MINT_WITH_ADDRESS')));
-        transferOwnership(signer);
+        transferOwnership(newOwner);
     }
 
     function addSigner(address account) public override onlyOwner {

@@ -4,7 +4,6 @@ pragma experimental ABIEncoderV2;
 import "../lib/interface/IERC721.sol";
 import "../lib/contracts/ERC721Base.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "hardhat/console.sol";
 
 /**
  * @title DavinciToken

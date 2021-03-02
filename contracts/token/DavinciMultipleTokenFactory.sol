@@ -18,19 +18,19 @@ contract DavinciMultipleTokenFactory {
         return newTokens[owner];
     }
 
-    function isExist(address token) internal view returns(bool) {
-      bool exists = false;
-      for (uint i = 0; i < allTokens.length; i++) {
-        if (allTokens[i] == token) {
-          exists = true;
-          break;
-        }
-      }
-      return exists;
-    }
+    // function isExist(address token) internal view returns(bool) {
+    //   bool exists = false;
+    //   for (uint i = 0; i < allTokens.length; i++) {
+    //     if (allTokens[i] == token) {
+    //       exists = true;
+    //       break;
+    //     }
+    //   }
+    //   return exists;
+    // }
 
     function addTokenManually(address owner, address token) external {
-      require(!isExist(token), "Token already exists");
+      //require(!isExist(token), "Token already exists");
       newTokens[owner].push(token);
       allTokens.push(token);
     }
