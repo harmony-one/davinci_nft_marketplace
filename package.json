@@ -5,15 +5,14 @@
   "main": "index.js",
   "license": "ISC",
   "dependencies": {
-    "@harmony-js/contract": "^0.1.36",
-    "@harmony-js/core": "^0.1.36",
+    "@harmony-js/contract": "^0.1.56",
+    "@harmony-js/core": "^0.1.57",
     "@openzeppelin/contracts": "^3.4.0",
     "@openzeppelin/contracts-ethereum-package": "^3.0.0",
     "@openzeppelin/test-helpers": "^0.5.6",
     "@openzeppelin/truffle-upgrades": "^1.0.2",
     "@openzeppelin/upgrades": "^2.8.0",
     "dotenv": "^8.2.0",
-    "truffle": "^5.1.48",
     "truffle-flattener": "^1.4.4",
     "truffle-hdwallet-provider": "^1.0.17",
     "truffle-plugin-verify": "^0.5.2"
@@ -27,6 +26,9 @@
     "last 2 Chrome versions"
   ],
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.1",
+    "@nomiclabs/hardhat-truffle5": "^2.0.0",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
     "@openzeppelin/cli": "^2.8.2",
     "chai": "^4.3.0",
     "chai-as-promised": "^7.1.1",
