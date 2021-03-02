@@ -5,8 +5,8 @@
   "main": "index.js",
   "license": "ISC",
   "dependencies": {
-    "@harmony-js/contract": "^0.1.36",
-    "@harmony-js/core": "^0.1.36",
+    "@harmony-js/contract": "^0.1.56",
+    "@harmony-js/core": "^0.1.57",
     "@openzeppelin/contracts": "^3.4.0",
     "@openzeppelin/contracts-ethereum-package": "^3.0.0",
     "@openzeppelin/test-helpers": "^0.5.6",
