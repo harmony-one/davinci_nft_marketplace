@@ -7,7 +7,6 @@ import "../lib/interface/IERC1155.sol";
 import "../lib/utils/StringLibrary.sol";
 import "../lib/utils/BytesLibrary.sol";
 import "../lib/contracts/ERC165.sol";
-import "./OwnableOperatorRole.sol";
 import "./ERC20TransferProxy.sol";
 import "./TransferProxy.sol";
 import "./ExchangeOrdersHolderV1.sol";
@@ -53,7 +52,7 @@ contract ExchangeV1 is Ownable, ExchangeDomainV1 {
     ERC20TransferProxy public erc20TransferProxy;
     ExchangeStateV1 public state;
     ExchangeOrdersHolderV1 public ordersHolder;
-
+    
     constructor(
         TransferProxy _transferProxy, TransferProxyForDeprecated _transferProxyForDeprecated, ERC20TransferProxy _erc20TransferProxy, ExchangeStateV1 _state,
         ExchangeOrdersHolderV1 _ordersHolder, address payable _beneficiary, address _buyerFeeSigner

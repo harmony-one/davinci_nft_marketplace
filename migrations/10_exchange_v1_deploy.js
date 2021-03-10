@@ -5,10 +5,10 @@ var ERC20TransferProxy = artifacts.require("ERC20TransferProxy");
 var ExchangeStateV1 = artifacts.require("ExchangeStateV1");
 var ExchangeOrdersHolderV1 = artifacts.require("ExchangeOrdersHolderV1");
 
-module.exports = function(deployer) {
+module.exports = function(deployer, network) {
+  if (network === "test") return;
   deployer.then(async () => {
-    return;
-    const beneficiary = "0x39938073d24bf00a742ec939491871798b866579";
+    const beneficiary = "0x041e007da100b97656965dbe87b5de0d1d931766";
     const buyerFeeSigner = "0x041e007da100b97656965dbe87b5de0d1d931766";
 
     const tranferProxy = await TransferProxy.deployed();
