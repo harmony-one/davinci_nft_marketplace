@@ -9,7 +9,7 @@ const DavinciMultipleToken = artifacts.require("DavinciMultipleToken");
 var chaiAsPromised = require("chai-as-promised");
 const { sign } = require("./sign");
 const { AssetType, Order, OrderKey, Asset, getOrderHash, getBuyerFeeHash } = require("./order");
-
+const BN = web3.utils.BN;
 const { assert } = require("chai").use(chaiAsPromised);
 const ZERO = "0x0000000000000000000000000000000000000000";
 
@@ -125,20 +125,21 @@ contract("Exchange V1 Test", (accounts) => {
   });
 
   it("Should exchange hrc721 order correctly", async () => {
-    const order = Order(
-      OrderKey(john, 1, Asset(davinciToken.address, 0, AssetType.ERC721), Asset(ZERO, 0, AssetType.ETH)),
-      20,
-      10,
-      250
-    );
-    const orderSig = await sign(getOrderHash(order), john);
-
+    const buying = "3000000000000000000";
+    const sellerFee = 250;
+    const selling = 10;
     const buyerFee = 250;
     const amount = 1;
     const buyer = ZERO;
 
+    const order = Order(
+      OrderKey(john, 1, Asset(davinciToken.address, 0, AssetType.ERC721), Asset(ZERO, 0, AssetType.ETH)),
+      selling,
+      buying,
+      sellerFee
+    );
+    const orderSig = await sign(getOrderHash(order), john);
     const buyerSig = await sign(getBuyerFeeHash(order, buyerFee), buyerFeeSigner);
-
     assert.equal((await davinciToken.balanceOf(bob)).toNumber(), 0);
     //approve
     davinciToken.setApprovalForAll(transferProxy.address, true, { from: john });
@@ -148,7 +149,14 @@ contract("Exchange V1 Test", (accounts) => {
 
     console.log("bob eth balance ======> ", (await web3.eth.getBalance(bob)).toString());
 
-    const res = await exchangeCore.exchange(order, orderSig, buyerFee, buyerSig, amount, buyer, { from: bob });
+    const paying = new BN(buying).mul(new BN(amount.toString())).div(new BN(selling.toString()));
+    const buyFeeValue = paying.mul(new BN(buyerFee.toString())).div(new BN("10000"));
+    const value = new BN(paying).add(buyFeeValue);
+
+    const res = await exchangeCore.exchange(order, orderSig, buyerFee, buyerSig, amount, buyer, {
+      from: bob,
+      value: value,
+    });
 
     console.log("bob eth balance after ======> ", (await web3.eth.getBalance(bob)).toString());
     assert.equal((await davinciToken.balanceOf(bob)).toNumber(), 1);
