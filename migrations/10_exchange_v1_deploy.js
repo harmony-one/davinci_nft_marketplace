@@ -8,6 +8,7 @@ var ExchangeOrdersHolderV1 = artifacts.require("ExchangeOrdersHolderV1");
 module.exports = function(deployer, network) {
   if (network === "test") return;
   deployer.then(async () => {
+    return;
     const beneficiary = "0x041e007da100b97656965dbe87b5de0d1d931766";
     const buyerFeeSigner = "0x041e007da100b97656965dbe87b5de0d1d931766";
 
