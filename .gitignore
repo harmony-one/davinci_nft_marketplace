@@ -4,3 +4,4 @@ build
 package-lock.json
 artifacts/
 cache/
+hardhat.config.js

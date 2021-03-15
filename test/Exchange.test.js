@@ -59,7 +59,9 @@ contract("Exchange V1 Test", (accounts) => {
       const sha = web3.utils.soliditySha3(davinciToken.address, tokenId); //abi.encode
       const { v, r, s } = await sign(sha, alice);
 
-      await davinciToken.mint(tokenId, v, r, s, [], `/721/item/${tokenId}`, { from: john });
+      await davinciToken.mint(tokenId, v, r, s, [], `/721/item/${tokenId}`, {
+        from: john,
+      });
 
       const uri = await davinciToken.tokenURI(tokenId);
 
@@ -144,21 +146,44 @@ contract("Exchange V1 Test", (accounts) => {
     //approve
     davinciToken.setApprovalForAll(transferProxy.address, true, { from: john });
 
-    console.log("Seller ==========> ", john);
-    console.log("Buyer ==========> ", bob);
+    const paying = new BN(buying).mul(new BN(amount.toString())).div(new BN(selling.toString()));
+    const buyFeeValue = paying.mul(new BN(buyerFee.toString())).div(new BN("10000"));
+    const value = new BN(paying).add(buyFeeValue);
+    await exchangeCore.exchange(order, orderSig, buyerFee, buyerSig, amount, buyer, {
+      from: bob,
+      value: value,
+    });
+    assert.equal((await davinciToken.balanceOf(bob)).toNumber(), 1);
+  });
+  it("Should exchange hrc1155 order correctly", async () => {
+    const buying = "3000000000000000000";
+    const sellerFee = 250;
+    const selling = 10;
+    const buyerFee = 250;
+    const amount = 5;
+    const tokenId = 1;
+    const buyer = ZERO;
 
-    console.log("bob eth balance ======> ", (await web3.eth.getBalance(bob)).toString());
+    const order = Order(
+      OrderKey(john, 1, Asset(davinciMultipleToken.address, tokenId, AssetType.ERC1155), Asset(ZERO, 0, AssetType.ETH)),
+      selling,
+      buying,
+      sellerFee
+    );
+    const orderSig = await sign(getOrderHash(order), john);
+    const buyerSig = await sign(getBuyerFeeHash(order, buyerFee), buyerFeeSigner);
+    assert.equal((await davinciMultipleToken.balanceOf(bob, tokenId)).toNumber(), 0);
+    //approve
+    davinciMultipleToken.setApprovalForAll(transferProxy.address, true, { from: john });
 
     const paying = new BN(buying).mul(new BN(amount.toString())).div(new BN(selling.toString()));
     const buyFeeValue = paying.mul(new BN(buyerFee.toString())).div(new BN("10000"));
     const value = new BN(paying).add(buyFeeValue);
 
-    const res = await exchangeCore.exchange(order, orderSig, buyerFee, buyerSig, amount, buyer, {
+    await exchangeCore.exchange(order, orderSig, buyerFee, buyerSig, amount, buyer, {
       from: bob,
       value: value,
     });
-
-    console.log("bob eth balance after ======> ", (await web3.eth.getBalance(bob)).toString());
-    assert.equal((await davinciToken.balanceOf(bob)).toNumber(), 1);
+    assert.equal((await davinciMultipleToken.balanceOf(bob, tokenId)).toNumber(), amount);
   });
 });
