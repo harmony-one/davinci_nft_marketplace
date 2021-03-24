@@ -2,13 +2,13 @@
 pragma solidity ^0.6.12;
 pragma experimental ABIEncoderV2;
 
-import './DavinciToken.sol';
+import './DigitalEnergyToken.sol';
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract DavinciTokenFactory is Ownable {
+contract DigitalEnergyTokenFactory is Ownable {
 
-    event DavinciTokenCreated(address owner, string name, string symbol, string contractURI, string tokenURIPrefix);
+    event DigitalEnergyTokenCreated(address owner, string name, string symbol, string contractURI, string tokenURIPrefix);
     mapping(address => address[]) private newTokens;
 
     address[] private allTokens;
@@ -42,20 +42,20 @@ contract DavinciTokenFactory is Ownable {
       allTokens.push(token);
     }
 
-    function createDavinciToken(
+    function createDigitalEnergyToken(
       string memory name,
       string memory symbol,
       string memory contractURI,
       string memory tokenURIPrefix
     ) external returns (address _token) {
-        DavinciToken token = new DavinciToken(name, symbol, msg.sender, contractURI, tokenURIPrefix);
+        DigitalEnergyToken token = new DigitalEnergyToken(name, symbol, msg.sender, contractURI, tokenURIPrefix);
 
         _token = address(token);
 
         newTokens[msg.sender].push(_token);
         allTokens.push(_token);
 
-        emit DavinciTokenCreated(msg.sender, name, symbol, contractURI, tokenURIPrefix);
+        emit DigitalEnergyTokenCreated(msg.sender, name, symbol, contractURI, tokenURIPrefix);
     }
 }
 
