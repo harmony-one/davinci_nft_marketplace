@@ -1,4 +1,4 @@
-# daVinci (Harmony NFT Marketplace Contract)
+# DigitalEnergy (Nordic Energy NFT Marketplace Contract)
 
 ## Development
 
