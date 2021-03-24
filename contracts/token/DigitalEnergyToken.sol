@@ -6,7 +6,7 @@ import "../lib/contracts/ERC721Base.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @title DavinciToken
+ * @title DigitalEnergyToken
  * @dev anyone can mint token.
  */
 contract DavinciToken is Ownable, IERC721, ERC721Base {
