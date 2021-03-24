@@ -33,4 +33,4 @@ This project is using Solc 0.6.12 as it's a most stable version.
 
 - ExchangeV1.sol - Main Contract for exchange
 - DigitalEnergyToken - HRC721 Token
-- DDigitalEnergyMultipleToken - HRC1155 Token
+- DigitalEnergyMultipleToken - HRC1155 Token
