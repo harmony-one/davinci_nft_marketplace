@@ -1,4 +1,4 @@
-var DavinciToken = artifacts.require("DigitalEnergyToken");
+var DDigitalEnergyToken = artifacts.require("DigitalEnergyToken");
 
 module.exports = function(deployer) {
   deployer.then(function() {
